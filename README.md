@@ -151,3 +151,35 @@ Your submission must include:
 ---
 
 Thank you for taking the time to complete this assignment! We’re looking forward to seeing what you build.
+
+---
+
+Local scaffold included
+
+This repository has a starter scaffold for the take-home assignment:
+
+- `server/` – Express + Mongoose backend (runs on port 4000 by default)
+- `client/` – Vite + React frontend (runs on port 3000 by default and proxies `/api` to the server)
+
+To get started locally:
+
+1. Start the server
+
+```
+cd server
+npm install
+cp .env.example .env   # edit if you use a remote MongoDB
+npm run dev
+```
+
+2. Start the client
+
+```
+cd client
+npm install
+npm run dev
+```
+
+Open `http://localhost:3000` in your browser.
+
+If you have questions or want me to wire additional features (auth, tests, persistent seeding), tell me which you'd like next.

@@ -1,0 +1,61 @@
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --accent:#7c3aed;
+  --muted:#9aa6b2;
+  --glass: rgba(255,255,255,0.03);
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linear-gradient(180deg,#071129 0%, #071021 60%);color:#e6eef7;min-height:100vh}
+.app-root{padding:32px 16px;max-width:920px;margin:0 auto}
+.app-header{text-align:center;margin-bottom:18px}
+.app-header h1{font-size:2.2rem;margin:0;background:linear-gradient(90deg,var(--accent),#06b6d4);-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin-top:6px}
+.container{display:flex;flex-direction:column;gap:14px}
+
+.glass{background:linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));border-radius:12px;padding:12px;box-shadow:0 6px 20px rgba(124,58,237,0.08);border:1px solid rgba(255,255,255,0.03)}
+
+.todo-form{display:flex;gap:8px;align-items:center}
+.todo-form input{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:8px;color:inherit}
+.title-input{flex:1;font-weight:600}
+.desc-input{width:280px}
+.date-input{width:150px}
+.btn{background:var(--accent);color:white;padding:8px 12px;border-radius:8px;border:none;cursor:pointer;transition:transform .12s ease, box-shadow .12s}
+.btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.04)}
+.btn.danger{background:#ef4444}
+.btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(124,58,237,0.12)}
+
+.todo-list{display:flex;flex-direction:column;gap:12px}
+.todo-item{display:grid;grid-template-columns:40px 1fr auto;gap:12px;align-items:center;transition:transform .18s ease, opacity .18s ease}
+.todo-item:hover{transform:translateY(-6px)}
+.todo-item .left{display:flex;justify-content:center}
+.checkbox{position:relative;display:inline-block}
+.checkbox input{opacity:0;width:0;height:0}
+.checkmark{width:22px;height:22px;border-radius:6px;background:linear-gradient(180deg,#071021,#0b1220);display:inline-block;border:1px solid rgba(255,255,255,0.04)}
+.checkbox input:checked + .checkmark{background:linear-gradient(90deg,var(--accent),#06b6d4);box-shadow:0 6px 18px rgba(124,58,237,0.18)}
+
+.body .title{font-weight:700}
+.body .desc{color:var(--muted);font-size:0.95rem;margin-top:4px}
+.index{font-weight:700;color:var(--muted);margin-right:8px;display:inline-block;width:34px;text-align:right}
+.due{display:inline-block;margin-top:6px;padding:4px 8px;border-radius:999px;font-size:0.85rem}
+.due.today{background:linear-gradient(90deg,var(--accent),#06b6d4);color:white}
+.due.overdue{background:#ef4444;color:white}
+.due.upcoming{background:#0ea5a4;color:white}
+.todo-item.nodate .due{display:none}
+.todo-item.today{border-left:4px solid rgba(124,58,237,0.2)}
+.todo-item.overdue{border-left:4px solid rgba(239,68,68,0.12)}
+.todo-item.upcoming{border-left:4px solid rgba(14,165,164,0.08)}
+.actions{display:flex;gap:8px}
+.empty{text-align:center;color:var(--muted);padding:22px}
+.loading,.error{text-align:center;padding:22px;color:var(--muted)}
+
+.todo-item.done{opacity:0.6;text-decoration:line-through}
+
+/* small animation */
+@keyframes floatIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.todo-item{animation:floatIn .28s ease both}
+
+.footer{text-align:center;margin-top:18px;color:var(--muted);font-size:0.9rem}
+
+/* responsive */
+@media (max-width:640px){.desc-input{display:none}.todo-form{flex-direction:column;align-items:stretch}.actions{gap:6px}}
