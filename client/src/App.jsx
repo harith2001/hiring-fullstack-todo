@@ -34,7 +34,7 @@ export default function App() {
       </header>
 
       <main className="container">
-        <TodoForm onCreated={(t) => { setTodos((s) => [t, ...s]); toast.success('Task added') }} />
+  <TodoForm onCreated={(t) => { setTodos((s) => ([...s, t])); toast.success('Task added') }} />
 
         {loading ? (
           <div className="loading">Loading...</div>

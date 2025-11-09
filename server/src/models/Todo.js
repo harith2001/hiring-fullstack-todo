@@ -6,6 +6,10 @@ const todoSchema = new mongoose.Schema(
     description: { type: String, default: '' },
     done: { type: Boolean, default: false },
     dueDate: { type: Date },
+    alarm: { type: Date },
+    location: { type: String, default: '' },
+    links: { type: [String], default: [] },
+    position: { type: Number, default: 0 },
   },
   { timestamps: true }
 );

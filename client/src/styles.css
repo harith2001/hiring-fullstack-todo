@@ -45,6 +45,11 @@ body{margin:0;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;background:linea
 .todo-item.today{border-left:4px solid rgba(124,58,237,0.2)}
 .todo-item.overdue{border-left:4px solid rgba(239,68,68,0.12)}
 .todo-item.upcoming{border-left:4px solid rgba(14,165,164,0.08)}
+.alarm{color:var(--muted);margin-top:6px}
+.location{color:var(--muted);margin-top:6px}
+.links{margin-top:6px}
+.links a{color:#9ad9ff}
+.links a:hover{text-decoration:underline}
 .actions{display:flex;gap:8px}
 .empty{text-align:center;color:var(--muted);padding:22px}
 .loading,.error{text-align:center;padding:22px;color:var(--muted)}

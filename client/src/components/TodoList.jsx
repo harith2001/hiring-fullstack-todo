@@ -12,8 +12,38 @@ export default function TodoList({ todos, setTodos }) {
     const next = Array.from(todos)
     const [moved] = next.splice(src, 1)
     next.splice(dst, 0, moved)
+    // optimistic UI update
     setTodos(next)
     toast.info('Reordered')
+
+    // persist new order to server
+    (async () => {
+      try {
+        const res = await fetch('/api/todos/order', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ ids: next.map(t=>t._id) })
+        })
+        if (!res.ok) {
+          const err = await res.json().catch(()=>({error:'Failed to reorder'}))
+          toast.error(err.error || 'Failed to persist order')
+          // optionally refetch or revert
+          const reload = await fetch('/api/todos')
+          const fresh = await reload.json()
+          setTodos(fresh)
+        } else {
+          // server returns the new ordered list -> use it to keep positions accurate
+          const updated = await res.json()
+          setTodos(updated)
+        }
+      } catch (e) {
+        toast.error('Network error while saving order')
+        // revert by refetching
+        const reload = await fetch('/api/todos')
+        const fresh = await reload.json()
+        setTodos(fresh)
+      }
+    })()
   }
 
   return (
@@ -26,11 +56,9 @@ export default function TodoList({ todos, setTodos }) {
             {(provided) => (
               <div ref={provided.innerRef} {...provided.droppableProps}>
                 {todos.map((t, idx) => (
-                  <Draggable key={t._id} draggableId={t._id} index={idx}>
+                  <Draggable key={t._id} draggableId={String(t._id)} index={idx}>
                     {(prov) => (
-                      <div ref={prov.innerRef} {...prov.draggableProps} {...prov.dragHandleProps}>
-                        <TodoItem todo={t} setTodos={setTodos} index={idx} />
-                      </div>
+                      <TodoItem todo={t} setTodos={setTodos} index={idx} provided={prov} />
                     )}
                   </Draggable>
                 ))}
